@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -33,7 +34,7 @@ public class ProdutoController {
 	}
 	
 	//READ 1
-	@GetMapping(path = "/id/{id}")
+	@GetMapping(path = "id/{id}")
 	public Optional<Produto> consultarProdutoPorId(@PathVariable int id) {
 		return produtoRepository.findById(id);
 	}
@@ -46,7 +47,7 @@ public class ProdutoController {
 	
 	//UPDATE
 	@PutMapping
-	public Produto atualizarProduto(@Valid Produto produto){
+	public @ResponseBody Produto atualizarProduto(@Valid Produto produto){
 		produtoRepository.save(produto);
 		return produto;
 	}
